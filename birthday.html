@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Shraddha 💜</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box;}
+        body{ 
+            height:100vh; 
+            overflow:hidden; 
+            font-family:'Poppins',sans-serif; 
+            background:black; 
+            cursor: pointer;
+        }
+
+        /* ⭐ Stars */
+        .star{ position:absolute; background:white; border-radius:50%; z-index:10; pointer-events: none; }
+
+        /* 🌸 Floating Flowers */
+        .flower { position: absolute; font-size: 20px; user-select: none; pointer-events: none; z-index: 12; }
+
+        .slide { 
+            position:absolute; width:100%; height:100%; 
+            display:flex; justify-content:center; align-items:center; 
+            flex-direction:column; opacity: 0; visibility: hidden; 
+        }
+
+        /* FIRST SCREEN */
+        .first{ 
+            background: radial-gradient(circle at center, #1a0b2e 0%, #000000 100%); 
+            opacity: 1; visibility: visible; z-index:4; 
+        }
+        #tap-text{ color:white; text-align:center; padding: 20px; }
+        #main-message{ display:none; font-family:'Dancing Script',cursive; color:#e0b0ff; font-size:2.2rem; text-align:center; padding: 20px; }
+
+        /* SECOND SCREEN */
+        .second{ z-index:3; }
+        #bg-second{ 
+            position:absolute; width:100%; height:100%; 
+            background:url('photo.jpg') center/cover no-repeat; 
+            filter: brightness(0.4); opacity: 0;
+        }
+        .final-text { 
+            position:relative; text-align:center; color:white; 
+            font-size:40px; font-family:'Dancing Script',cursive; 
+            z-index:15; text-shadow: 2px 2px 15px rgba(0,0,0,1);
+            opacity: 0;
+        }
+
+        /* 📸 THIRD SCREEN (SLIDESHOW) */
+        .third { z-index: 2; overflow: hidden; }
+        .slideshow-layer { 
+            position: absolute; width: 100%; height: 100%; 
+            background-size: cover; background-position: center; 
+            filter: brightness(0.7) blur(1.5px); opacity: 0; 
+        }
+        .third-text-container { z-index: 20; text-align: center; padding: 20px; opacity: 0; width: 90%; }
+        .third-text { 
+            color:white; font-size:22px; line-height: 1.6;
+            font-family:'Poppins', sans-serif; 
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.8);
+        }
+        .purple { color: #e0b0ff; font-family: 'Dancing Script', cursive; font-size: 32px; }
+    </style>
+</head>
+<body onclick="handleClick()">
+
+    <audio id="mySong" src="Señorita (Instrumental) - Inst.mp3" loop></audio>
+
+    <div class="slide first" id="first">
+        <div id="tap-text">
+            <h2>Before you continue…</h2>
+            <p>I just wanna say something 💌</p>
+            <br>
+            <p style="font-size: 0.8rem; color: #aaa; animation: pulse 1.5s infinite;">👉 Tap anywhere to start</p>
+        </div>
+        <div id="main-message">
+            Hey Shraddha… 💜<br>
+            I made something just for you 🎁
+        </div>
+    </div>
+
+    <div class="slide second" id="second">
+        <div id="bg-second"></div>
+        <div class="final-text" id="finalText">
+            Happiest Birthday<br>Shraddha 🎂✨
+        </div>
+    </div>
+
+    <div class="slide third" id="third">
+        <div id="bg1" class="slideshow-layer"></div>
+        <div id="bg2" class="slideshow-layer"></div>
+        <div class="third-text-container" id="textContainer">
+            <div class="third-text">
+                Hey <span class="purple">Shraddha</span>,<br><br>
+                Mujhe samajh nahi aa raha likhu kya lekin fir bhi koshish kar raha hoon... <br>
+                Bas itna kehna hai ki tumhari simplicity aur tumhara simple sa nature dono hi bohot achhe hain. <br><br>
+                jada kuch nhi bas yahi kehna hai ki once again,<br>
+                <span class="purple">Happy Birthday Shraddha 💜</span><br>
+                May this year bring you calm, happiness and everything you truly deserve. <br>
+                Stay happy and keep smiling. 🌸<br>
+                <small style="font-size: 14px;">Because every smile of yours adds a little more light to the world ✨</small>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        /* ⭐ Stars Background */
+        for(let i=0; i<100; i++){
+            let s = document.createElement("div");
+            s.className = "star";
+            let size = Math.random() * 2;
+            s.style.width = size + "px";
+            s.style.height = size + "px";
+            s.style.left = Math.random() * 100 + "vw";
+            s.style.top = Math.random() * 100 + "vh";
+            document.body.appendChild(s);
+            gsap.to(s, {opacity: Math.random(), duration: Math.random() * 2 + 1, repeat: -1, yoyo: true});
+        }
+
+        /* 🌸 Floating Flowers Logic */
+        function createHeart() {
+            const heart = document.createElement("div");
+            heart.className = "flower";
+            heart.innerHTML = "🌸";
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.top = "110vh";
+            document.body.appendChild(heart);
+            gsap.to(heart, {
+                y: "-120vh", 
+                x: (Math.random() - 0.5) * 200, 
+                opacity: 0, 
+                duration: Math.random() * 3 + 2, 
+                onComplete: () => heart.remove() 
+            });
+        }
+
+        let step = 0;
+        /* 🖼️ Photos Array (Make sure these exist in your folder) */
+        const images = [
+            'IMG_20260403_225051.jpg', 
+            'IMG_20260403_225103.jpg', 
+            'IMG_20260403_225114.jpg', 
+            'IMG_20260403_225128.jpg', 
+            'IMG_20260403_225140.jpg', 
+            'IMG_20260403_225153.jpg'
+        ];
+
+        let currentImgIndex = 0;
+        let activeLayer = 1;
+
+        function startSlideshow() {
+            const layers = [document.getElementById("bg1"), document.getElementById("bg2")];
+            layers[0].style.backgroundImage = `url('${images[0]}')`;
+            gsap.to(layers[0], {opacity: 1, scale: 1.1, duration: 2});
+
+            setInterval(() => {
+                currentImgIndex = (currentImgIndex + 1) % images.length;
+                let nextLayer = activeLayer === 1 ? layers[1] : layers[0];
+                let prevLayer = activeLayer === 1 ? layers[0] : layers[1];
+
+                nextLayer.style.backgroundImage = `url('${images[currentImgIndex]}')`;
+                
+                gsap.fromTo(nextLayer, {scale: 1, opacity: 0}, {scale: 1.1, opacity: 1, duration: 1.5});
+                gsap.to(prevLayer, {opacity: 0, duration: 1.5});
+
+                activeLayer = activeLayer === 1 ? 2 : 1;
+            }, 3000);
+
+            setInterval(createHeart, 600);
+        }
+
+        function handleClick(){
+            // Music Starts on First Click
+            const song = document.getElementById("mySong");
+            if (song.paused) {
+                song.play().catch(err => console.log("Music wait for interaction"));
+            }
+
+            if(step === 0){
+                step = 1;
+                gsap.to("#tap-text", {opacity: 0, duration: 0.5, onComplete: () => {
+                    document.getElementById("tap-text").style.display = "none";
+                    document.getElementById("main-message").style.display = "block";
+                    gsap.fromTo("#main-message", {opacity: 0, y: 20}, {opacity: 1, y: 0, duration: 1.2});
+                }});
+            } 
+            else if(step === 1){
+                step = 2;
+                gsap.to("#first", {opacity: 0, visibility: "hidden", duration: 1});
+                gsap.to("#second", {opacity: 1, visibility: "visible", duration: 1});
+                setTimeout(() => {
+                    gsap.to("#bg-second", {opacity: 1, duration: 2});
+                    gsap.to("#finalText", {opacity: 1, scale: 1.05, duration: 2, delay: 0.5});
+                }, 500);
+            } 
+            else if(step === 2){
+                step = 3;
+                gsap.to("#second", {opacity: 0, visibility: "hidden", duration: 1});
+                gsap.to("#third", { 
+                    opacity: 1, 
+                    visibility: "visible", 
+                    duration: 1, 
+                    onComplete: () => {
+                        startSlideshow();
+                        gsap.to("#textContainer", {opacity: 1, duration: 2});
+                    } 
+                });
+            }
+        }
+    </script>
+</body>
+</html>
